@@ -14,7 +14,7 @@ string s6 = "dingjian";
 string s7 = string(10, 'c');// 临时对象
 ```
 
-#### (2) string操作
+#### (2) 操作
 
 **读写string**
 
@@ -83,5 +83,95 @@ for(auto &c : s) // c是一个引用，对c的改变将会改变原字符串
 // 2. 改变string中部分的字符-通过下标[]
 string s = "abcd";
 s[0] = toupper(s[0]);
+```
+
+
+
+### 3. VECTOR
+
+#### (1) 定义和初始化
+
+```c++
+vector<T> v1;
+vector<T> v1(v2);
+vector<T> v2 = v1; //等价上式
+vector<T> v3(n, val);
+vector<T> v4(n);
+vector<T> v5{a,b,c...};
+vector<T> v6 = {a,b,c...}; //等价上式
+```
+
+#### (2) 操作
+
+1. warning:添加元素时不能使用for循环
+2. 不能用下标方式添加元素
+
+```c++
+v.push_back();
+v.empty();
+v.size();
+v[n]; //返回引用
+v == v1; // != > >= < <= 
+```
+
+### 4. 迭代器
+
+迭代器是用来访问容器的元素，功能与下标运算符相同。
+
+```c++
+//获取迭代器
+auto a = v.begin(), b = v.end();
+//操作
+*iter; //返回元素的引用
+iter->mem; // 等价于(*iter).mem 解引用iter，获取元素的成员
+//迭代器运算
+++iter; --iter;
+iter + n; iter - n;
+iter += n; iter -= n;
+== != >= <=
+```
+
+### 5.数组
+
+#### (1) 定义和初始化
+
+1. 数组的维度必须是已知的
+2. 数组的维度必须是常量表达式
+3. 数组初始化不允许拷贝和赋值，arr2 = arr这样是错误的
+
+```c++
+int arr[10];
+int *arr[10]; //包含10个指针的数组
+constexpr unsigned sz = 10;
+string strs[sz];
+//显示初始化
+int a1[3] = {0, 1, 2};
+int a2[] = {0, 1, 2};
+int a3[5] = {0, 1, 2}; //等价于{0, 1, 2, 0, 0}
+```
+
+**字符数组的初始化：**
+
+1. 可以使用字符串字面值初始化
+2. 注意初始化时，结尾处的空字符'\0'
+
+```c++
+char a1[] = {'C', '+', '+'};
+char a2[] = {'C', '+', '+', '\0'}
+char a3[4] = "ding"; //error
+char a4[5] = "ding"; //correct
+char a5[] = "ding";
+```
+
+**复杂初始化**
+
+引用一个数组&
+
+指向一个数组*
+
+```c++
+//由内向外阅读
+int (*arr1)[10] = &arr; //arr1是指针，指向一个10个元素的数组arr
+int (&arr2)[10] = arr; //arr2是引用，引用了10个元素的数组arr
 ```
 
